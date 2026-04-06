@@ -45,7 +45,7 @@ export default function Home() {
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               placeholder="Try Manila, Tokyo, New York..."
-              className="w-full h-12 md:h-14 rounded-full bg-surface border border-surface-border px-5 pr-28 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-border-hover transition-all focus:shadow-[0_0_0_3px_hsla(20,100%,60%,0.15)]"
+              className="w-full h-12 md:h-14 rounded-full bg-card border border-surface-border px-5 pr-28 text-sm text-foreground placeholder:text-muted-foreground shadow-sm focus:outline-none focus:border-border-hover transition-all focus:shadow-[0_0_0_3px_hsla(18,72%,48%,0.2)]"
             />
             <button
               onClick={() => handleSearch()}
@@ -64,7 +64,7 @@ export default function Home() {
                 <button
                   key={city}
                   onClick={() => handleSearch(city)}
-                  className="text-sm px-4 py-1.5 rounded-full border border-surface-border bg-surface text-accent hover:text-background hover:bg-gradient-to-r hover:from-accent hover:to-primary hover:border-transparent transition-all duration-200 flex items-center gap-1.5 btn-press"
+                  className="text-sm px-4 py-1.5 rounded-full border border-surface-border bg-card text-accent shadow-sm hover:text-primary-foreground hover:bg-gradient-to-r hover:from-accent hover:to-primary hover:border-transparent hover:shadow transition-all duration-200 flex items-center gap-1.5 btn-press"
                 >
                   <Globe size={12} className="opacity-60" />
                   {city}

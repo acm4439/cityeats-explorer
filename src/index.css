@@ -6,52 +6,53 @@
 
 @layer base {
   :root {
-    --background: 30 6% 7%;
-    --foreground: 30 20% 93%;
+    /* Warm paper + terracotta / teal — light, high legibility */
+    --background: 38 42% 97%;
+    --foreground: 222 32% 18%;
 
-    --card: 30 8% 10%;
-    --card-foreground: 30 20% 93%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 32% 18%;
 
-    --popover: 30 8% 10%;
-    --popover-foreground: 30 20% 93%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 32% 18%;
 
-    --primary: 20 100% 60%;
-    --primary-foreground: 30 20% 98%;
+    --primary: 18 72% 48%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 30 8% 14%;
-    --secondary-foreground: 30 20% 93%;
+    --secondary: 35 30% 93%;
+    --secondary-foreground: 222 28% 22%;
 
-    --muted: 30 8% 14%;
-    --muted-foreground: 30 10% 47%;
+    --muted: 38 25% 92%;
+    --muted-foreground: 222 14% 42%;
 
-    --accent: 35 100% 64%;
-    --accent-foreground: 30 20% 98%;
+    --accent: 168 46% 32%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 72% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 142 69% 58%;
-    --warning: 40 96% 53%;
+    --success: 152 55% 36%;
+    --warning: 38 92% 42%;
 
-    --border: 30 8% 16%;
-    --border-hover: 20 100% 60%;
-    --input: 30 8% 16%;
-    --ring: 20 100% 60%;
+    --border: 35 20% 88%;
+    --border-hover: 18 72% 48%;
+    --input: 35 20% 88%;
+    --ring: 18 72% 48%;
 
     --radius: 0.75rem;
 
-    --surface: 30 8% 10%;
-    --surface-hover: 30 8% 13%;
-    --surface-border: 30 8% 17%;
+    --surface: 0 0% 100%;
+    --surface-hover: 38 35% 98%;
+    --surface-border: 35 18% 86%;
 
-    --sidebar-background: 30 6% 7%;
-    --sidebar-foreground: 30 20% 93%;
-    --sidebar-primary: 20 100% 60%;
-    --sidebar-primary-foreground: 30 20% 98%;
-    --sidebar-accent: 30 8% 14%;
-    --sidebar-accent-foreground: 30 20% 93%;
-    --sidebar-border: 30 8% 12%;
-    --sidebar-ring: 20 100% 60%;
+    --sidebar-background: 38 42% 97%;
+    --sidebar-foreground: 222 32% 18%;
+    --sidebar-primary: 18 72% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 35 30% 93%;
+    --sidebar-accent-foreground: 222 28% 22%;
+    --sidebar-border: 35 18% 88%;
+    --sidebar-ring: 18 72% 48%;
   }
 }
 
@@ -76,27 +77,28 @@
 
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(35 100% 64%), hsl(20 100% 60%));
+    background-image: linear-gradient(135deg, hsl(18 72% 46%), hsl(168 46% 32%));
   }
 
   .text-gradient-amber {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(35 100% 64%), hsl(20 100% 60%));
+    background-image: linear-gradient(135deg, hsl(18 72% 46%), hsl(28 85% 42%));
   }
 
   .glow-bg {
     background:
       radial-gradient(
-        ellipse 50% 40% at 50% 38%,
-        hsla(35, 100%, 64%, 0.12) 0%,
-        hsla(20, 100%, 60%, 0.06) 40%,
-        transparent 70%
+        ellipse 55% 45% at 50% 35%,
+        hsla(18, 72%, 52%, 0.09) 0%,
+        hsla(168, 46%, 38%, 0.06) 42%,
+        transparent 72%
       ),
       radial-gradient(
-        ellipse 30% 30% at 60% 55%,
-        hsla(20, 100%, 60%, 0.08) 0%,
-        transparent 60%
-      );
+        ellipse 38% 35% at 72% 58%,
+        hsla(38, 60%, 70%, 0.12) 0%,
+        transparent 58%
+      ),
+      hsl(var(--background));
   }
 
   .card-noise {
@@ -107,7 +109,7 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    opacity: 0.03;
+    opacity: 0.035;
     pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 128px 128px;
@@ -124,7 +126,7 @@
     right: 0;
     height: 1px;
     border-radius: inherit;
-    background: linear-gradient(90deg, transparent, hsla(20, 100%, 60%, 0.15) 50%, transparent);
+    background: linear-gradient(90deg, transparent, hsla(18, 72%, 48%, 0.22) 50%, transparent);
     pointer-events: none;
   }
 

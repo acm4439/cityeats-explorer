@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { BrandMark } from "@/components/BrandMark";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -27,16 +28,13 @@ export default function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 h-14 border-b transition-all duration-300",
-        scrolled
-          ? "backdrop-blur-xl border-surface-border"
-          : "bg-background border-surface-border"
+        "fixed top-0 left-0 right-0 z-50 h-14 border-b border-surface-border transition-all duration-300",
+        scrolled ? "bg-background/92 backdrop-blur-md shadow-sm" : "bg-background",
       )}
-      style={scrolled ? { backgroundColor: "hsla(30, 6%, 7%, 0.85)" } : undefined}
     >
       <div className="container h-full flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded bg-primary" />
+          <BrandMark className="size-6" />
           <span className="text-base font-bold tracking-tight text-foreground">
             CityEats
           </span>

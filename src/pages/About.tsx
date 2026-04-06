@@ -1,13 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const techStack = [
-  { name: "React", color: "bg-sky-900/30 text-sky-400" },
-  { name: "Tailwind CSS", color: "bg-teal-900/30 text-teal-400" },
-  { name: "Foursquare Places API", color: "bg-violet-900/30 text-violet-400" },
-  { name: "React Router", color: "bg-orange-900/30 text-orange-400" },
-];
-
 export default function About() {
   return (
     <div className="min-h-screen flex flex-col animate-page-enter">
@@ -41,22 +34,11 @@ export default function About() {
             ))}
           </div>
 
-          {/* Built with */}
-          <div className="w-10 h-[3px] rounded-full bg-accent/60 mb-4" />
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-4">Built With</h2>
-          <div className="flex flex-wrap gap-2 mb-12">
-            {techStack.map((tech) => (
-              <span key={tech.name} className={`text-xs px-3 py-1.5 rounded-full font-mono ${tech.color}`}>
-                {tech.name}
-              </span>
-            ))}
-          </div>
-
           {/* Data callout */}
           <div className="rounded-lg border border-surface-border bg-surface-hover p-5 border-l-4 border-l-accent">
             <h3 className="text-sm font-semibold text-foreground mb-2">Data &amp; Accuracy</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Restaurant data is sourced from the Foursquare Places API and reflects real-time availability within your searched city.
+              Restaurant data is sourced from the Yelp Fusion API and reflects listings near your searched city (about a five-mile radius when coordinates are available).
             </p>
           </div>
         </div>

@@ -1,33 +1,20 @@
-import { Link } from "react-router-dom";
+import { BrandMark } from "@/components/BrandMark";
 
 export default function Footer() {
   return (
     <footer className="border-t border-surface-border bg-background">
-      <div className="container py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+      <div className="container flex flex-col gap-6 py-10 text-sm sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-5 h-5 rounded bg-primary" />
+          <div className="mb-2 flex items-center gap-2">
+            <BrandMark className="size-5" />
             <span className="font-bold text-foreground">CityEats</span>
             <span className="font-bold text-gradient-amber">Explorer</span>
           </div>
-          <p className="text-muted-foreground leading-relaxed">
-            Discover restaurants worth going to, in any city.
-          </p>
+          <p className="leading-relaxed text-muted-foreground">Discover restaurants worth going to, in any city.</p>
         </div>
-        <div className="flex items-center justify-start md:justify-center gap-6">
-          <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">Home</Link>
-          <Link to="/explore" className="text-muted-foreground hover:text-foreground transition-colors">Explore</Link>
-          <Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</Link>
-        </div>
-        <div className="flex flex-col items-start md:items-end justify-center">
-          <p className="text-muted-foreground text-xs">Powered by Foursquare</p>
-        </div>
-      </div>
-      <div className="border-t border-surface-border">
-        <div className="container py-4">
-          <p className="text-xs text-muted-foreground text-center">
-            &copy; 2025 CityEats Explorer
-          </p>
+        <div className="flex shrink-0 flex-col gap-2 sm:text-right">
+          <p className="text-xs text-muted-foreground">Powered by Yelp</p>
+          <p className="text-xs text-muted-foreground">&copy; 2026 CityEats Explorer</p>
         </div>
       </div>
     </footer>
