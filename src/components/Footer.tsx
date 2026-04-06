@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="flex items-center gap-2 mb-2">
             <div className="w-5 h-5 rounded bg-primary" />
             <span className="font-bold text-foreground">CityEats</span>
-            <span className="font-bold text-primary">Explorer</span>
+            <span className="font-bold text-gradient-amber">Explorer</span>
           </div>
           <p className="text-muted-foreground leading-relaxed">
             Discover restaurants worth going to, in any city.

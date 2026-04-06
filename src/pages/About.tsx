@@ -1,14 +1,20 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const techStack = ["React", "Tailwind CSS", "Foursquare Places API", "React Router"];
+const techStack = [
+  { name: "React", color: "bg-sky-900/30 text-sky-400" },
+  { name: "Tailwind CSS", color: "bg-teal-900/30 text-teal-400" },
+  { name: "Foursquare Places API", color: "bg-violet-900/30 text-violet-400" },
+  { name: "React Router", color: "bg-orange-900/30 text-orange-400" },
+];
 
 export default function About() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col animate-page-enter">
       <Navbar />
       <main className="flex-1 pt-14">
         <div className="container max-w-[680px] py-16">
+          <div className="w-10 h-[3px] rounded-full bg-accent/60 mb-6" />
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-foreground mb-6">
             About CityEats Explorer
           </h1>
@@ -17,6 +23,7 @@ export default function About() {
           </p>
 
           {/* How it works */}
+          <div className="w-10 h-[3px] rounded-full bg-accent/60 mb-4" />
           <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-6">How It Works</h2>
           <div className="space-y-6 mb-12">
             {[
@@ -35,17 +42,18 @@ export default function About() {
           </div>
 
           {/* Built with */}
+          <div className="w-10 h-[3px] rounded-full bg-accent/60 mb-4" />
           <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-4">Built With</h2>
           <div className="flex flex-wrap gap-2 mb-12">
             {techStack.map((tech) => (
-              <span key={tech} className="text-xs px-3 py-1.5 rounded-full bg-surface border border-surface-border text-muted-foreground font-mono">
-                {tech}
+              <span key={tech.name} className={`text-xs px-3 py-1.5 rounded-full font-mono ${tech.color}`}>
+                {tech.name}
               </span>
             ))}
           </div>
 
           {/* Data callout */}
-          <div className="rounded-lg border border-surface-border bg-surface p-5">
+          <div className="rounded-lg border border-surface-border bg-surface-hover p-5 border-l-4 border-l-accent">
             <h3 className="text-sm font-semibold text-foreground mb-2">Data &amp; Accuracy</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Restaurant data is sourced from the Foursquare Places API and reflects real-time availability within your searched city.

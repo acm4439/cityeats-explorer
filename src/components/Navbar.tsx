@@ -29,9 +29,10 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 h-14 border-b transition-all duration-300",
         scrolled
-          ? "bg-background/80 backdrop-blur-xl border-surface-border"
+          ? "backdrop-blur-xl border-surface-border"
           : "bg-background border-surface-border"
       )}
+      style={scrolled ? { backgroundColor: "hsla(30, 6%, 7%, 0.85)" } : undefined}
     >
       <div className="container h-full flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
@@ -39,7 +40,7 @@ export default function Navbar() {
           <span className="text-base font-bold tracking-tight text-foreground">
             CityEats
           </span>
-          <span className="text-base font-bold tracking-tight text-primary">
+          <span className="text-base font-bold tracking-tight text-gradient-amber">
             Explorer
           </span>
         </Link>
@@ -51,15 +52,19 @@ export default function Navbar() {
               key={link.to}
               to={link.to}
               className={cn(
-                "text-sm transition-colors relative py-1",
+                "text-sm transition-colors relative py-1 flex flex-col items-center gap-1",
                 location.pathname === link.to
                   ? "text-foreground"
-                  : "text-muted-foreground hover:text-foreground",
-                "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-primary after:scale-x-0 after:transition-transform after:duration-200 hover:after:scale-x-100",
-                location.pathname === link.to && "after:scale-x-100"
+                  : "text-muted-foreground hover:text-foreground"
               )}
             >
               {link.label}
+              <span
+                className={cn(
+                  "w-1 h-1 rounded-full bg-accent transition-opacity duration-200",
+                  location.pathname === link.to ? "opacity-100" : "opacity-0"
+                )}
+              />
             </Link>
           ))}
         </div>
@@ -82,12 +87,15 @@ export default function Navbar() {
                 key={link.to}
                 to={link.to}
                 className={cn(
-                  "text-sm py-2 transition-colors",
+                  "text-sm py-2 transition-colors flex items-center gap-2",
                   location.pathname === link.to
                     ? "text-foreground"
                     : "text-muted-foreground"
                 )}
               >
+                {location.pathname === link.to && (
+                  <span className="w-1 h-1 rounded-full bg-accent" />
+                )}
                 {link.label}
               </Link>
             ))}

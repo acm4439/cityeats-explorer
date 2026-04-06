@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { Search, ArrowRight, AlertCircle } from "lucide-react";
+import { Search, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import RestaurantCard from "@/components/RestaurantCard";
@@ -44,11 +44,11 @@ export default function Explore() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col animate-page-enter">
       <Navbar />
       <main className="flex-1 pt-14">
         {/* Search bar */}
-        <div className="sticky top-14 z-40 bg-background/80 backdrop-blur-xl border-b border-surface-border">
+        <div className="sticky top-14 z-40 backdrop-blur-xl border-b border-surface-border" style={{ backgroundColor: "hsla(30, 6%, 7%, 0.8)" }}>
           <div className="container py-3">
             <div className="relative max-w-lg">
               <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
@@ -58,11 +58,11 @@ export default function Explore() {
                 onChange={(e) => setSearchInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 placeholder="Search a city..."
-                className="w-full h-10 rounded-full bg-surface border border-surface-border pl-10 pr-24 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-border-hover transition-colors"
+                className="w-full h-10 rounded-full bg-surface border border-surface-border pl-10 pr-24 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-border-hover transition-all focus:shadow-[0_0_0_3px_hsla(20,100%,60%,0.15)]"
               />
               <button
                 onClick={handleSearch}
-                className="absolute right-1 top-1/2 -translate-y-1/2 h-8 px-4 rounded-full bg-primary text-primary-foreground text-xs font-medium flex items-center gap-1 hover:opacity-90 transition-opacity"
+                className="absolute right-1 top-1/2 -translate-y-1/2 h-8 px-4 rounded-full bg-primary text-primary-foreground text-xs font-medium flex items-center gap-1 hover:opacity-90 transition-opacity btn-press"
               >
                 Search <ArrowRight size={12} />
               </button>
@@ -89,9 +89,9 @@ export default function Explore() {
                   key={opt.value}
                   onClick={() => setSort(opt.value)}
                   className={cn(
-                    "text-xs px-3 py-1.5 rounded-full border transition-colors",
+                    "text-xs px-3 py-1.5 rounded-full border transition-colors btn-press",
                     sort === opt.value
-                      ? "bg-primary text-primary-foreground border-primary"
+                      ? "bg-accent text-background border-accent"
                       : "bg-surface border-surface-border text-muted-foreground hover:text-foreground"
                   )}
                 >
