@@ -33,7 +33,7 @@ export default function RestaurantDetail() {
   const coordStr = `${Math.abs(coordinates.lat).toFixed(4)}\u00B0 ${coordinates.lat >= 0 ? "N" : "S"}, ${Math.abs(coordinates.lng).toFixed(4)}\u00B0 ${coordinates.lng >= 0 ? "E" : "W"}`;
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col animate-page-enter">
       <Navbar />
       <main className="flex-1 pt-14">
         <div className="container max-w-3xl py-8">
@@ -52,8 +52,8 @@ export default function RestaurantDetail() {
             <span className="text-xs px-3 py-1 rounded-full bg-secondary text-muted-foreground border border-surface-border">
               {price}
             </span>
-            <span className={cn("text-sm font-semibold px-3 py-1 rounded", ratingColor(rating))}>
-              {rating.toFixed(1)}
+            <span className={cn("text-sm font-semibold px-3 py-1 rounded-full", ratingColor(rating))}>
+              ★ {rating.toFixed(1)}
             </span>
             <span className="text-xs text-muted-foreground">Based on reviews</span>
           </div>
@@ -66,7 +66,7 @@ export default function RestaurantDetail() {
               { icon: Clock, label: "Hours", value: hours },
               { icon: Phone, label: "Phone", value: phone },
             ].map((item) => (
-              <div key={item.label} className="flex gap-3 p-4 rounded-lg bg-surface border border-surface-border">
+              <div key={item.label} className="flex gap-3 p-5 rounded-lg bg-surface border border-surface-border card-noise card-top-highlight">
                 <item.icon size={18} className="text-primary/60 shrink-0 mt-0.5" />
                 <div>
                   <p className="text-xs text-muted-foreground mb-0.5">{item.label}</p>
@@ -78,13 +78,14 @@ export default function RestaurantDetail() {
 
           {/* About */}
           <section className="mb-10">
+            <div className="w-10 h-[3px] rounded-full bg-accent/60 mb-3" />
             <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-3">About</h2>
             <p className="text-foreground leading-relaxed">{shortDescription}</p>
           </section>
 
           {/* Map placeholder */}
           <section className="mb-12">
-            <div className="rounded-lg border border-dashed border-surface-border bg-surface p-10 flex flex-col items-center justify-center text-center">
+            <div className="rounded-lg border border-dashed border-surface-border bg-surface p-10 flex flex-col items-center justify-center text-center card-noise">
               <MapPin size={28} className="text-muted-foreground mb-3" />
               <p className="font-mono text-sm text-muted-foreground mb-1">{coordStr}</p>
               <p className="text-xs text-muted-foreground">Interactive map coming soon</p>
@@ -93,6 +94,7 @@ export default function RestaurantDetail() {
 
           {/* Similar */}
           <section>
+            <div className="w-10 h-[3px] rounded-full bg-accent/60 mb-3" />
             <h2 className="text-lg font-semibold text-foreground mb-4">You might also like</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 overflow-x-auto">
               {similar.map((r) => (
