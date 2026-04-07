@@ -134,8 +134,9 @@
     animation: page-enter 0.3s ease-out both;
   }
 
+  /* Use opacity so :active does not override translate-y centering on absolute buttons */
   .btn-press:active {
-    transform: scale(0.97);
+    opacity: 0.92;
   }
 }
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, MapPin, Navigation, Clock, Phone, ExternalLink } from "lucide-react";
+import { ArrowLeft, MapPin, Clock, Phone, ExternalLink } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import RestaurantCard from "@/components/RestaurantCard";
@@ -56,7 +56,7 @@ export default function RestaurantDetail() {
           setReviews([]);
           setSimilar([]);
         } else {
-          setError("Something went wrong. Please try again.");
+          setError("We couldn't load this restaurant. Please go back and try again.");
         }
       })
       .finally(() => {
@@ -112,9 +112,6 @@ export default function RestaurantDetail() {
   const lat = coordinates.lat;
   const lng = coordinates.lng;
   const hasCoords = lat != null && lng != null;
-  const coordStr = hasCoords
-    ? `${Math.abs(lat).toFixed(4)}\u00B0 ${lat >= 0 ? "N" : "S"}, ${Math.abs(lng).toFixed(4)}\u00B0 ${lng >= 0 ? "E" : "W"}`
-    : "Coordinates unavailable";
 
   const exploreCity = encodeURIComponent(city);
   const mapsHref =
@@ -122,7 +119,6 @@ export default function RestaurantDetail() {
 
   const infoItems = [
     { icon: MapPin, label: "Address", value: address },
-    { icon: Navigation, label: "Coordinates", value: coordStr, mono: true },
     { icon: Clock, label: "Hours", value: hours, preline: true },
     { icon: Phone, label: "Phone", value: phone },
   ] as const;

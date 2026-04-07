@@ -1,12 +1,11 @@
 import { Fragment, useState, useEffect, useMemo, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { Search, ArrowRight, AlertCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import RestaurantCard from "@/components/RestaurantCard";
 import { RestaurantGridCell, RestaurantResultsGrid } from "@/components/RestaurantResultsGrid";
 import { SkeletonCard } from "@/components/SkeletonCard";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { searchRestaurants } from "@/services/yelp";
 import type { Restaurant } from "@/types/restaurant";
@@ -145,7 +144,8 @@ export default function Explore() {
         if (!cancelled) setResults(list);
       })
       .catch(() => {
-        if (!cancelled) setError("Something went wrong. Please try again.");
+        if (!cancelled)
+          setError("We couldn't find results for that search. Try entering a valid city name and search again.");
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -204,7 +204,7 @@ export default function Explore() {
   return (
     <div className="min-h-screen flex flex-col animate-page-enter">
       <Navbar />
-      <main className="flex-1 pt-14">
+      <main className="flex min-h-0 flex-1 flex-col pt-14">
         {/* Fixed under navbar so it stays visible while scrolling */}
         <div className="fixed top-14 left-0 right-0 z-40 border-b border-surface-border bg-background/92 backdrop-blur-md shadow-sm">
           <div className="container py-3">
@@ -233,16 +233,9 @@ export default function Explore() {
         </div>
 
         {/* Offset below fixed search (input row + padding + optional validation line) */}
-        <div className="container py-8 pt-28">
-          {error ? (
-            <Alert variant="destructive" className="mb-6">
-              <AlertCircle className="h-4 w-4" />
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          ) : null}
-
+        <div className="container flex min-h-0 flex-1 flex-col py-8 pt-28">
           {/* Header & filters */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div className="mb-6 flex shrink-0 flex-col justify-between gap-4 sm:flex-row sm:items-center">
             <div>
               <h1 className="text-2xl font-bold text-foreground">
                 {cityParam ? `Restaurants in ${displayCity}` : "Search by city"}
@@ -284,57 +277,69 @@ export default function Explore() {
             </div>
           </div>
 
-          {/* Results */}
-          {!cityParam ? (
-            <div className="flex flex-col items-center justify-center py-24 text-center">
-              <Search size={40} className="text-muted-foreground mb-4" />
-              <h2 className="text-lg font-semibold text-foreground mb-1">Enter a city to explore</h2>
-              <p className="text-sm text-muted-foreground">Use the search bar above or pick a popular city from the home page.</p>
+          {error ? (
+            <div className="flex flex-1 flex-col items-center justify-center">
+              <div className="flex flex-col items-center justify-center px-4 py-24 text-center">
+                <Search size={40} className="mb-4 text-muted-foreground" aria-hidden />
+                <h2 className="mb-1 text-lg font-semibold text-foreground">We couldn&apos;t load results</h2>
+                <p className="max-w-md text-sm text-muted-foreground">{error}</p>
+              </div>
             </div>
-          ) : loading ? (
-            <RestaurantResultsGrid variant="loading">
-              {Array.from({ length: PAGE_SIZE }).map((_, i) => (
-                <RestaurantGridCell key={i}>
-                  <SkeletonCard />
-                </RestaurantGridCell>
-              ))}
-            </RestaurantResultsGrid>
-          ) : error ? null : sortedResults.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-24 text-center">
-              <Search size={40} className="text-muted-foreground mb-4" />
-              <h2 className="text-lg font-semibold text-foreground mb-1">No restaurants found in {displayCity}</h2>
-              <p className="text-sm text-muted-foreground">Try another city like Manila, Tokyo, or New York.</p>
-            </div>
-          ) : (
-            <>
-              <div ref={resultsAnchorRef} className="scroll-mt-36" aria-hidden />
-              {totalPages > 1 ? (
-                <ResultsPagination
-                  currentPage={safePage}
-                  totalPages={totalPages}
-                  onPageChange={setPage}
-                  labelSuffix="top"
-                  className="mb-8 border-b border-surface-border pb-8"
-                />
-              ) : null}
-              <RestaurantResultsGrid>
-                {paginatedResults.map((r) => (
-                  <RestaurantGridCell key={r.id}>
-                    <RestaurantCard restaurant={r} />
+          ) : null}
+
+          {/* Results (hidden while error alert is shown) */}
+          {!error ? (
+            !cityParam ? (
+              <div className="flex flex-col items-center justify-center py-24 text-center">
+                <Search size={40} className="text-muted-foreground mb-4" />
+                <h2 className="text-lg font-semibold text-foreground mb-1">Enter a city to explore</h2>
+                <p className="text-sm text-muted-foreground">Use the search bar above or pick a popular city from the home page.</p>
+              </div>
+            ) : loading ? (
+              <RestaurantResultsGrid variant="loading">
+                {Array.from({ length: PAGE_SIZE }).map((_, i) => (
+                  <RestaurantGridCell key={i}>
+                    <SkeletonCard />
                   </RestaurantGridCell>
                 ))}
               </RestaurantResultsGrid>
-              {totalPages > 1 ? (
-                <ResultsPagination
-                  currentPage={safePage}
-                  totalPages={totalPages}
-                  onPageChange={setPage}
-                  labelSuffix="bottom"
-                  className="mt-10 border-t border-surface-border pt-8"
-                />
-              ) : null}
-            </>
-          )}
+            ) : sortedResults.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-24 text-center">
+                <Search size={40} className="text-muted-foreground mb-4" />
+                <h2 className="text-lg font-semibold text-foreground mb-1">No restaurants found in {displayCity}</h2>
+                <p className="text-sm text-muted-foreground">Try another city like Manila, Tokyo, or New York.</p>
+              </div>
+            ) : (
+              <>
+                <div ref={resultsAnchorRef} className="scroll-mt-36" aria-hidden />
+                {totalPages > 1 ? (
+                  <ResultsPagination
+                    currentPage={safePage}
+                    totalPages={totalPages}
+                    onPageChange={setPage}
+                    labelSuffix="top"
+                    className="mb-8 border-b border-surface-border pb-8"
+                  />
+                ) : null}
+                <RestaurantResultsGrid>
+                  {paginatedResults.map((r) => (
+                    <RestaurantGridCell key={r.id}>
+                      <RestaurantCard restaurant={r} />
+                    </RestaurantGridCell>
+                  ))}
+                </RestaurantResultsGrid>
+                {totalPages > 1 ? (
+                  <ResultsPagination
+                    currentPage={safePage}
+                    totalPages={totalPages}
+                    onPageChange={setPage}
+                    labelSuffix="bottom"
+                    className="mt-10 border-t border-surface-border pt-8"
+                  />
+                ) : null}
+              </>
+            )
+          ) : null}
         </div>
       </main>
       <Footer />
