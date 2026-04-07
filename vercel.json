@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/yelp-api/(.*)",
+      "destination": "/api/yelp-proxy?fwd=$1"
+    },
+    {
+      "source": "/nominatim/(.*)",
+      "destination": "/api/nominatim-proxy?fwd=$1"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

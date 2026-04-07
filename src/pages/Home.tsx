@@ -26,7 +26,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative flex items-center justify-center min-h-screen pt-14 glow-bg">
+      <section className="relative flex flex-col items-center justify-center min-h-[min(78dvh,48rem)] pt-16 pb-14 md:pt-[4.5rem] md:pb-16 glow-bg">
         <div className="container max-w-2xl text-center px-4">
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-foreground leading-[1.05] mb-4">
             Find your next
